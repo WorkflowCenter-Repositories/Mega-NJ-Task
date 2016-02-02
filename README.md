@@ -1,5 +1,5 @@
 # Mega-NJ-Task
-Repository for Mega Neighbor Joining Task 
+##Repository for Mega Neighbor Joining Task 
 
 How to deploy the task:  
 - Clone this repository to your machine  
@@ -7,7 +7,7 @@ How to deploy the task:
 - from terminal window change to Mega-NJ-Task folder and type:
 - . ./task-deploy.sh
   
-Information:  
+##Information:  
 
   Task-Name: Mega NJ  
   version: 1.0  
