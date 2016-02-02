@@ -1,5 +1,0 @@
-input-file: 'aligned-sequences'  #first input file
-docker-image: 'rawa/mega-cc'   #Docker image
-
-
-
