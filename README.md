@@ -2,11 +2,12 @@
 ##Repository for Mega Neighbor Joining Task 
 
 ###How to deploy the task:  
-- Clone this repository to your machine  
-- in Mega-NJ-Task/input folder put your file or you can use the exist sample input
-- from terminal window change to Mega-NJ-Task folder and type:
-- . ./task-deploy.sh
-  
+- Clone this repository to your machine   
+- if you want deploy the task with your own data then  
+  - in Mega-NJ-Task/input folder put your file, edit Mega-NJ-Task/input.yaml file and change 'input-file' to your file name  
+  - in a terminal run . ./task-deploy.sh within Mega-NJ-Task folder  
+- if you are happy to deploy the task with the sample input file in input folder just run task-deploy.sh as above  
+- 
 ###Information:  
 
   Task-Name: Mega NJ  
