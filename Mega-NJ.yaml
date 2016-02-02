@@ -5,29 +5,24 @@ tosca_definitions_version: cloudify_dsl_1_0
 imports:
   - http://www.getcloudify.org/spec/cloudify/3.1/types.yaml
   - https://raw.githubusercontent.com/rawaqasha/e-sc-cloudify/master/esc_nodetypes.yaml
-  - https://raw.githubusercontent.com/rawaqasha/WF-Task-Repository/master/Mega-NJ/megaNJ-nodetype.yaml
+  #- https://github.com/WorkflowCenter-Repositories/Mega-NJ-Task/raw/master/megaNJ_nodetype.yaml
 
 inputs:
 
   input-dir:
       description: >
         The dir path of the input files  
-      default: '~/input'
+      default: 'input'
 
-  input-file1:
+  input-file:
       description: >
         input file for importFile1
-      default: file1.txt
-
-  input-file2:
-      description: >
-        input file for importFile2
-      default: file2.txt
+      default: aligned-sequences
 
   docker-image: 
       description: > 
         Docker image to be used for container building
-      default: 'rawa/megaCC'
+      default: 'rawa/mega-cc'
 
 node_types:
 
@@ -94,6 +89,31 @@ node_templates:
       - type: cloudify.relationships.contained_in
         target: megaNJ
 
+  importFile:
+    type: importfile
+    properties:
+      block_description: import file
+      block_name: ImportFile1.jar
+      block_category: File Management
+      service_type: block
+      Source: file1.txt
+    interfaces:
+      cloudify.interfaces.lifecycle:
+        configure:
+          implementation: scripts/get-input.sh
+          inputs:
+            process:
+             args: [Mega-NJ, megaNJ, { get_input: input-dir }, { get_input: input-file }] 
+        start: 
+          implementation: scripts/block-deploy3.sh
+          inputs:
+            process:
+             args: [Mega-NJ, megaNJ, 'https://github.com/rawaqasha/eScBlocks-host/raw/master/ImportFile1.jar', { get_input: input-file }]
+    relationships:
+      - type: cloudify.relationships.contained_in
+        target: megaNJ
+      - type: cloudify.relationships.depends_on
+        target: Java
   Wine:
     type: spec_library
     properties:
@@ -145,11 +165,20 @@ node_templates:
       site_coverage_cutoff(%): 95
     relationships:
       - type: cloudify.relationships.contained_in
-        target: container1
+        target: megaNJ
       - type: cloudify.relationships.depends_on
         target: Mega-CC
       - type: cloudify.relationships.depends_on
-        target: Java        
+        target: Java
+      - type: block_link
+        target: importFile
+        source_interfaces:
+          cloudify.interfaces.relationship_lifecycle:
+            preconfigure:
+              implementation: scripts/datacopy.sh
+              inputs:
+                process:
+                  args: [importFile/output-1, Mega-Nj/input-data, Mega-NJ, megaNJ]    
     interfaces:
       cloudify.interfaces.lifecycle:
         start:
@@ -166,7 +195,7 @@ node_templates:
           implementation: scripts/final-inhost.sh
           inputs:
             process:
-              args: [Mega-NJ]
+              args: [megaNJ]
     relationships:
       - type: cloudify.relationships.contained_in
         target: host
