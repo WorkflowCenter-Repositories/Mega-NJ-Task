@@ -6,13 +6,13 @@ General:
   version: 1.0
   Description: The task implements neighbour joining method. It was designed in the e-Science Central system.
   instruction-file: MegaNJ-instruction
-  task-dependencies: {java1.7, Wine1.6+, Mega-CC} 
+  task-dependencies: {java1.7, Wine1.6+, Mega-CC lib} 
 
 Blueprint:
 
   blueprint-name: Mega-NJ.yaml
-  Docker-images: rawa/megaCC 
-  sizes: 
+  Docker-images: rawa/mega-cc
+  sizes: 736MB
   OS-types: ubuntu14.4 
 
 Input:
