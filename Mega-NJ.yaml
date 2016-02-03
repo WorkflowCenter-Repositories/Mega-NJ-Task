@@ -195,7 +195,7 @@ node_templates:
           implementation: scripts/final-inhost.sh
           inputs:
             process:
-              args: [megaNJ]
+              args: [Mega-NJ]
     relationships:
       - type: cloudify.relationships.contained_in
         target: host

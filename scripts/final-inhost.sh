@@ -5,14 +5,17 @@ blueprint=$1
 
 ctx logger info "cleaning"
 
-for dir in ~/${blueprint}/*/
-do
-    d=${dir%*/}
-    rm -r ${d}
-done
+chmod 777 ~/${blueprint}/
+
+rm -r ~/${blueprint}/importFile
 
 rm ~/${blueprint}/${blueprint}.yaml
+
 ctx logger info "Deleting ${container}"
+
+sudo docker rm -f megaNJ
+
+
 
 
 

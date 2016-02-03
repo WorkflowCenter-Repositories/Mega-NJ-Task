@@ -14,5 +14,5 @@ Lib_URL=$2
   	        sudo docker exec -it ${CONTAINER_NAME} apt-get -y install git
         fi
 
-sudo docker exec -it ${CONTAINER_NAME} [ ! -d "work" ] &&sudo docker exec -it ${CONTAINER_NAME} git clone ${Lib_URL}
+#sudo docker exec -it ${CONTAINER_NAME} [ ! -d "work" ] && sudo docker exec -it ${CONTAINER_NAME} git clone ${Lib_URL}
 

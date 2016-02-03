@@ -6,9 +6,11 @@ if [[ -z ${Wget} ]]; then
    echo "wget installation"
    sudo apt-get install -y wget
 fi
-wget https://github.com/WorkflowCenter-Repositories/ToolsInstallationScripts/raw/master/tools-install.sh
+if [[ ! -f  tools-install.sh ]]; then
+  wget https://github.com/WorkflowCenter-Repositories/ToolsInstallationScripts/raw/master/tools-install.sh
+  chmod u+x tools-install.sh
+fi
 
-chmod u+x tools-install.sh
 . ./tools-install.sh
 
 sudo service docker start
@@ -21,3 +23,5 @@ sudo service docker start
   cfy local init --install-plugins -p Mega-NJ.yaml --input input.yaml
 
 cfy local execute -w install
+
+echo "your output files are in ~/Mega-NJ/Mega-NJ folder"
