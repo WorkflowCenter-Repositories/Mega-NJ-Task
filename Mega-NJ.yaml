@@ -22,7 +22,7 @@ inputs:
   docker-image: 
       description: > 
         Docker image to be used for container building
-      default: 'rawa/mega-cc'
+      default: 'dtdwd/mega-cc'
 
 node_types:
 
